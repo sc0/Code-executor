@@ -6,14 +6,10 @@ services:
       context: ./code-exec-backend
     ports:
       - "3000:3000"
-    volumes:
-      - ./code-exec-backend/:/app
 
   frontend:
     build:
       context: ./code-exec-frontend/
-    volumes:
-      - ./code-exec-frontend/:/app
     command: npm start
     ports:
       - "4200:4200"
