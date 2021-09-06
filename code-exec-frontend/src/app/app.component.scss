@@ -1,0 +1,55 @@
+.page-container {
+  font-family: 'Lato', Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.logo {
+  font-family: 'Lato-Black', Arial, Helvetica, sans-serif;
+  font-size: 24pt;
+  font-weight: light;
+  color: silver;
+}
+
+.logo-link {
+  text-decoration: none;
+}
+
+.header {
+  display: flex;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 100px;
+}
+
+.header-left, .header-right {
+  flex: 1;
+}
+
+.header-left {
+}
+
+.header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.main-content {
+  display: flex;
+  justify-content: center;
+  min-height: 300px;
+  width: 100%;
+}
+
+.footer {
+  padding-top: 10px;
+  color: silver;
+  font-size: 9pt;
+  text-align: center;
+  jorder-top: 1px solid silver;
+  min-height: 100px;
+  width: 100%;
+}

@@ -1,0 +1,53 @@
+<form id="command-executor-form" [formGroup]="commandForm" (keydown)="submitForm($event, commandForm)">
+
+  <div class="content">
+    <input 
+       class="form-control"
+       id="command-field" 
+       type="text" 
+       formControlName="command" 
+       placeholder="{{ animatePlaceholder$ | async }}"
+     />
+    <div class='alert alert-danger' 
+      *ngIf="commandForm.controls['command'].errors?.multicommand">
+        Please specify only one command at a time.
+    </div>
+
+    <div class='alert alert-danger' 
+      *ngIf="commandForm.controls['command'].errors?.privilageElevationRisk">
+        Please do not attempt to elevate your privilages nor spawn new shells, thanks.
+    </div>
+
+    <div class="action-tip" 
+      *ngIf="!commandForm.controls['command'].errors 
+              && commandForm.controls['command'].dirty 
+              && !commandForm.controls['command'].disabled">
+        Press enter to execute
+    </div>
+
+    <div class="commandResult" *ngIf="commandForm.controls['command'].disabled">
+      <div class="commandLabelRow col-md-12">
+        <div>
+          <span class="commandLabel">* Executing command: </span> 
+          <span class="commandNameLabel">{{commandForm.controls['command'].value}}</span>
+        </div>
+        <br/>
+        <div *ngFor="let result of latestOutput?.results">
+          <div class="commandLabel" *ngIf="result.stream === resultType.STDOUT">
+            <pre>{{result.value}}</pre>
+          </div>
+          <div class="alert alert-warning" *ngIf="result.stream === resultType.STDERR">
+            <pre>{{result.value}}</pre>
+          </div>
+          <div class="alert alert-danger" *ngIf="result.stream === resultType.ERROR">
+            <pre>{{result.value}}</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button *ngIf="!noReset && latestOutput && latestOutput.executionStatus !== executionStatus.IN_PROGRESS" 
+      class="btn btn-outline-secondary" (click)="restartForm()">Restart</button>
+
+  </div>
+</form>

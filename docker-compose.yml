@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./code-exec-backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./code-exec-backend/:/app
+
+  frontend:
+    build:
+      context: ./code-exec-frontend/
+    volumes:
+      - ./code-exec-frontend/:/app
+    command: npm start
+    ports:
+      - "4200:4200"
+
+  mongo:
+    image: mongo:latest
+    restart: on-failure
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: toor
+      MONGO_INITDB_DATABASE: codeexec
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes: 
+      - ./mongo/data:/data/db
